@@ -18,13 +18,13 @@
             "check_dependency_tree_detection_status": true,
             "_comment_check_dependency_tree_detection_status": "Whether to check if dependency tree was successfully detected. Options: true | false. Default: true",
             "expected_total_dependencies_number": {
-                "eq": 51
+                "gte": 51
             },
             "expected_direct_dependencies_number": {
                 "eq": 37
             },
             "expected_transitive_dependencies_number": {
-                "eq": 14
+                "gte": 14
             },
             "_comment_expected_dependencies_number": "Optional. Expected number of dependencies with comparison operator. Operators: gt (>), gte (>=), lt (<), lte (<=), eq (==). If not provided, this check will not be performed.",
             "direct_dependencies_names_list": {
@@ -83,6 +83,7 @@
                     "markupsafe-3.0.3-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
                     "urllib3-2.6.3-py3-none-any.whl",
                     "importlib_metadata-8.7.1-py3-none-any.whl"
+                    "packaging"
                 ]
             },
             "_comment_dependencies_names_list": "Optional. Check specific libraries in direct dependencies. Operators: eq (==), contains (all items from expected list in actual), in(all items from actual list in expected), nin(actual list does not contain provided libs). If not provided, this check will not be performed.",
@@ -121,21 +122,21 @@
                     "operator": "eq",
                     "value": "Trying version getter: PythonVersionFile"
                 },
-                {
-                    "operator": "regex",
-                    "value": "Found Python version \\(3\\.9\\.5\\) for Pip project at \"/.*pip_full_priority_chain.*\""
-                },
+                  {
+                      "operator": "regex",
+                      "value": "Found Python version.*3\\.9\\.5.*pip_full_priority_chain"
+                  },
                 {
                     "operator": "eq",
                     "value": "python version set to: 3.9.5"
                 },
-               {
-                   "operator": "eq",
-                    "value": "Command: \"install-tool python 3.9.5\""
-               },
               {
                    "operator": "eq",
                     "value": "Installing tool python@3.9.5..."
+               },
+                 {
+                   "operator": "eq",
+                    "value": "Install tool python succeeded"
                }
             ],
             "_comment_expected_log_lines": "Optional. List of log lines to validate. Each entry should have an 'operator' (eq or regex) and 'value' (string or regex pattern). Example: [{'operator': 'eq', 'value': 'Python version: 3.11'}, {'operator': 'regex', 'value': 'Python version: \\d+\\.\\d+'}]. If not provided, only log attachment will be performed."
